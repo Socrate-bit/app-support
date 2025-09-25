@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECOM-PARIS LC</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      line-height: 1.6;
+    }
+    header {
+      border-bottom: 2px solid #333;
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #222;
+    }
+    .contact {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ECOM-PARIS LC</h1>
+    <h2>Mobile App Development</h2>
+  </header>
+
+  <section>
+    <p><strong>Company Name:</strong> ECOM-PARIS LC</p>
+    <p><strong>Representative:</strong> Lucas Soullier</p>
+    <p><strong>Business Address:</strong> 8206 LOUISIANA BLVD NE, STE A #2226, Albuquerque NM 87113, USA</p>
+    <p><strong>State of Registration:</strong> New Mexico</p>
+  </section>
+
+  <section class="contact">
+    <h3>Contact</h3>
+    <p>Email: <a href="mailto:soullierlucas@icloud.com">soullierlucas@icloud.com</a></p>
+  </section>
+</body>
+</html>
