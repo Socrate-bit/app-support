@@ -58,7 +58,7 @@
   <p>This Privacy Policy explains how <strong>ECOM-PARIS LLC</strong> ("we", "our", "us") collects, uses, stores, shares, and protects your personal information when you use the <strong>Tuco</strong> mobile application ("the App") or related services.</p>
 
   <h2>1. Information We Collect and How We Collect It</h2>
-  <p>We collect only the data needed to run the App. We do not ask for your name, email address, phone number, or any account credentials, and we do not access your contacts, photos, or location.</p>
+  <p>We collect only the data needed to run the App. We do not ask for your phone number, and we do not access your contacts, photos, or location. You can use the App without creating an identified account: a signed-in account is optional and is only used to keep your progress across devices.</p>
   <table>
     <thead>
       <tr>
@@ -74,13 +74,23 @@
         <td>Created automatically the first time you open the App.</td>
       </tr>
       <tr>
+        <td>Optional sign-in information</td>
+        <td>If you choose to sign in with Apple or Google, the email address and name released by that provider, held by Firebase Authentication to secure your account. Apple's "Hide My Email" is supported.</td>
+        <td>Only if you choose to sign in. The App works fully without it, and this information is never sent to the AI services in Section 4.</td>
+      </tr>
+      <tr>
+        <td>Display name</td>
+        <td>The name shown on your profile and used by the AI tutor to greet you during calls. It defaults to a placeholder and you can change it at any time in the Profile screen.</td>
+        <td>Set by you in the App. You are free to use a nickname or any name you like.</td>
+      </tr>
+      <tr>
         <td>Voice audio</td>
-        <td>Your spoken words during AI conversation practice ("calls").</td>
-        <td>Captured through your device microphone, only after you grant microphone permission and only while a call is active.</td>
+        <td>A recording of your spoken words during AI conversation practice ("calls") and pronunciation exercises.</td>
+        <td>Captured through your device microphone, only after you grant microphone permission and only while you are actively recording an answer.</td>
       </tr>
       <tr>
         <td>Conversation content</td>
-        <td>Transcripts of what you say, messages you type, the AI's replies, and the language, level, and lesson topic of the current session.</td>
+        <td>Transcripts of what you say, messages you type, the AI's replies, your pronunciation scores, and the language, level, lesson topic, and lesson vocabulary of the current session.</td>
         <td>Generated during calls and lessons you choose to start.</td>
       </tr>
       <tr>
@@ -103,9 +113,12 @@
 
   <h2>2. How We Use Your Information</h2>
   <ul>
-    <li><strong>Voice audio and conversation content:</strong> to transcribe your speech, generate the AI's conversational replies and feedback, and produce spoken audio for those replies.</li>
+    <li><strong>Voice audio:</strong> to score your pronunciation down to the individual sound, and to let you listen back to your own recordings inside the App.</li>
+    <li><strong>Conversation content:</strong> to generate the AI tutor's conversational replies, corrections and feedback, and to produce the spoken audio of those replies.</li>
+    <li><strong>Display name:</strong> so the AI tutor can address you by name during a call.</li>
     <li><strong>Learning data:</strong> to save your progress, personalize lessons and vocabulary reviews, and display your history and streaks.</li>
     <li><strong>Anonymous account identifier:</strong> to keep your learning data associated with your device across sessions and to let you delete it.</li>
+    <li><strong>Optional sign-in information:</strong> to secure your account and restore your progress if you change device.</li>
     <li><strong>Usage and device data:</strong> to understand how the App is used, diagnose bugs, and improve features.</li>
     <li><strong>Support correspondence:</strong> to respond to your requests.</li>
     <li><strong>All categories:</strong> to comply with legal obligations.</li>
@@ -113,11 +126,14 @@
   <p>We do not use your data for advertising, we do not build advertising profiles, and we do not track you across other companies' apps or websites.</p>
 
   <h2>3. Microphone and Voice Data</h2>
-  <p>Tuco uses your device microphone to power AI conversation practice. Microphone access is requested through the standard iOS permission prompt and is used only during active calls. Your voice is processed transiently to transcribe it and to generate a response; audio recordings are not stored by us after processing.</p>
+  <p>Tuco uses your device microphone to power AI conversation practice. Microphone access is requested through the standard iOS permission prompt and is used only while you are actively recording an answer.</p>
+  <p><strong>Speech-to-text runs on your device.</strong> Your spoken words are converted into text by Apple's built-in speech recognition, on your device, whenever your language supports on-device recognition. That text — not the audio — is what is sent to the AI service that writes the tutor's replies.</p>
+  <p><strong>Your voice recording leaves your device in two cases:</strong> it is sent to our pronunciation-scoring provider (Section 4) to be scored and is not retained by that provider afterwards; and it is stored in your own account in Firebase Storage so that the App can replay it to you in your call history and pronunciation feedback. You can delete these recordings at any time by deleting your account, as described in Section 10.</p>
   <p>We do not collect, store, or retain any biometric or voice-print data, and no biometric identification is performed on your voice.</p>
 
   <h2>4. Sharing With Third-Party AI Services</h2>
-  <p>To provide conversation practice, the App sends some of your data to third-party AI services. <strong>Before your first AI conversation, the App shows a notice describing this sharing and asks for your explicit consent.</strong> If you decline, no data is sent to these services and you can still use the parts of the App that do not require AI conversation. You can withdraw your consent at any time in Settings.</p>
+  <p>To provide conversation practice, the App sends some of your data to third-party AI services. <strong>Before any of this data is sent, and before the microphone permission prompt, the App shows a full-screen notice describing exactly what is sent and to whom, and asks for your explicit consent.</strong> If you decline, no data is sent to these services and you can still use the parts of the App that do not require AI — browsing lessons, your vocabulary and your history. You can withdraw your consent at any time in <strong>Settings &rarr; Privacy &rarr; AI data processing</strong>, which immediately blocks all further requests to these services.</p>
+  <p>Requests to Azure AI Speech and SpeechSuper are routed through our own servers (Google Cloud Functions, hosted in the European Union) so that our API credentials are never shipped inside the App.</p>
   <table>
     <thead>
       <tr>
@@ -129,16 +145,22 @@
     </thead>
     <tbody>
       <tr>
-        <td><strong>Google Gemini</strong> (Google LLC)<br><a href="https://policies.google.com/privacy">Google Privacy Policy</a></td>
-        <td>Your voice audio during calls, the text of your spoken or typed messages, the prior turns of the current conversation, and the language, level, and lesson topic of the session. No name, email, device identifier, or other account information is sent.</td>
-        <td>Speech transcription and generation of conversational replies and feedback.</td>
-        <td>Processed transiently for the request. Not retained and not used to train Google's models under the paid API terms we use.</td>
+        <td><strong>Google Gemini</strong> (Google LLC), accessed through Firebase AI Logic<br><a href="https://policies.google.com/privacy">Google Privacy Policy</a></td>
+        <td><strong>Text only — your voice audio is never sent to Gemini.</strong> The text of your spoken messages (transcribed on your device) and of the messages you type; the prior turns of the current conversation; your display name, level, native language, target language, the lesson topic and its vocabulary; and your pronunciation score for the message you just spoke. No email address, sign-in information, or device identifier is sent.</td>
+        <td>Generating the tutor's conversational replies, corrections, grammar feedback, translations and suggested answers.</td>
+        <td>Processed transiently for the request. Not retained and not used to train Google's models under the Firebase AI Logic / Vertex AI terms we use.</td>
       </tr>
       <tr>
-        <td><strong>ElevenLabs</strong> (ElevenLabs Inc.)<br><a href="https://elevenlabs.io/privacy-policy">ElevenLabs Privacy Policy</a></td>
-        <td>The text of the AI's reply to be spoken aloud. Your own voice is never sent to ElevenLabs.</td>
-        <td>Converting the AI's text reply into spoken audio.</td>
-        <td>Processed transiently for the request. Not retained and not used to train ElevenLabs' models.</td>
+        <td><strong>Azure AI Speech</strong> (Microsoft Corporation)<br><a href="https://privacy.microsoft.com/privacystatement">Microsoft Privacy Statement</a></td>
+        <td>The text of the AI tutor's reply to be spoken aloud, and the language it should be spoken in. Because the tutor may greet you by name, that reply text can contain your display name. <strong>Your own voice is never sent to Microsoft.</strong></td>
+        <td>Converting the tutor's text reply into the spoken voice you hear.</td>
+        <td>Processed transiently for the request. Not retained and not used to train Microsoft's models.</td>
+      </tr>
+      <tr>
+        <td><strong>SpeechSuper</strong> (SpeechSuper Technology)<br><a href="https://www.speechsuper.com/privacy-policy">SpeechSuper Privacy Policy</a></td>
+        <td><strong>Your voice recording</strong> (a short audio clip of the answer you just spoke), the reference phrase you were asked to say, the language, and your anonymous account identifier. No name, email address or sign-in information is sent.</td>
+        <td>Scoring your pronunciation, word by word and sound by sound, so the tutor can tell you which sounds to correct.</td>
+        <td>Processed for the scoring request and not retained afterwards or used to train their models.</td>
       </tr>
     </tbody>
   </table>
@@ -147,32 +169,33 @@
   <h2>5. Other Service Providers</h2>
   <p>We do not sell or rent personal data. Apart from the AI services above, we share data only with the following processors, who act on our behalf and under our instructions:</p>
   <ul>
-    <li><strong>Google Firebase</strong> (Google LLC) — Firebase Authentication generates your anonymous account identifier; Cloud Firestore stores your learning data. <a href="https://firebase.google.com/support/privacy">Firebase Privacy Information</a>.</li>
+    <li><strong>Google Firebase</strong> (Google LLC) — Firebase Authentication generates your anonymous account identifier and secures optional sign-in; Cloud Firestore stores your learning data and conversation history; Firebase Storage stores your voice recordings so you can replay them; Cloud Functions run our server-side code. <a href="https://firebase.google.com/support/privacy">Firebase Privacy Information</a>.</li>
     <li><strong>Mixpanel</strong> (Mixpanel Inc.) — stores usage and device data described in Section 1 so that we can analyze how the App is used and improve it. Mixpanel data is associated with your anonymous account identifier only. <a href="https://mixpanel.com/legal/privacy-policy/">Mixpanel Privacy Policy</a>.</li>
+    <li><strong>Superwall</strong> (Superwall Inc.) — manages subscription paywalls and purchase state. <a href="https://superwall.com/privacy">Superwall Privacy Policy</a>.</li>
   </ul>
   <p>None of these providers use your data for their own purposes. All of them are bound by data processing agreements providing protections equivalent to this Privacy Policy. We may also disclose data if required by law or to protect our legal rights.</p>
 
   <h2>6. International Transfers</h2>
-  <p>Our service providers process data in the United States and other countries. Where data is transferred outside the European Economic Area, we rely on appropriate safeguards such as the EU-U.S. Data Privacy Framework and/or the European Commission's Standard Contractual Clauses.</p>
+  <p>Our service providers process data in the United States and other countries. Our own server-side functions run in the European Union; the AI speech services they call may process data in the United States. Where data is transferred outside the European Economic Area, we rely on appropriate safeguards such as the EU-U.S. Data Privacy Framework and/or the European Commission's Standard Contractual Clauses.</p>
 
   <h2>7. Data Retention</h2>
   <ul>
-    <li><strong>Voice audio:</strong> not stored; processed in real time and discarded.</li>
+    <li><strong>Voice audio:</strong> not retained by the AI provider that scores it. A copy is kept in your own account so you can replay it, and is deleted when you delete your account or request deletion.</li>
     <li><strong>Conversation content and learning data:</strong> kept in your profile until you delete your account or request deletion.</li>
     <li><strong>Usage and device data:</strong> kept in Mixpanel for up to [24] months, then deleted or aggregated.</li>
     <li><strong>Support correspondence:</strong> kept for up to [12] months after resolution.</li>
   </ul>
 
   <h2>8. Data Security</h2>
-  <p>We use appropriate technical and organizational measures to protect personal data against unauthorized access, alteration, loss, or misuse, including encryption of data in transit (TLS) and at rest on our providers' infrastructure, and access controls limiting who can reach production data.</p>
+  <p>We use appropriate technical and organizational measures to protect personal data against unauthorized access, alteration, loss, or misuse, including encryption of data in transit (TLS) and at rest on our providers' infrastructure, access controls limiting who can reach production data, and server-side storage of all AI provider credentials so that they are never shipped inside the App.</p>
 
   <h2>9. Your Rights</h2>
-  <p>Depending on where you live (including under the GDPR if you are in the EEA or the UK, and under applicable U.S. state laws), you may have the right to access, correct, delete, or receive a copy of your personal data, to restrict or object to its processing, and to withdraw consent at any time. You may exercise these rights by using the in-app tools described in Section 10 or by contacting us at the address below. We respond to all verified requests in compliance with applicable privacy laws. If you are in the EEA or the UK, you also have the right to lodge a complaint with your local data protection authority.</p>
+  <p>Depending on where you live (including under the GDPR if you are in the EEA or the UK, and under applicable U.S. state laws), you may have the right to access, correct, delete, or receive a copy of your personal data, to restrict or object to its processing, and to withdraw consent at any time. You can withdraw your consent to AI processing directly in the App at <strong>Settings &rarr; Privacy &rarr; AI data processing</strong>. You may exercise your other rights by using the in-app tools described in Section 10 or by contacting us at the address below. We respond to all verified requests in compliance with applicable privacy laws. If you are in the EEA or the UK, you also have the right to lodge a complaint with your local data protection authority.</p>
 
   <h2>10. Data Deletion Requests</h2>
   <ul>
     <li>You can delete all your data at any time by deleting your account in the App: go to <strong>Settings</strong> and tap <strong>"Delete account"</strong>.</li>
-    <li>Deleting your account permanently erases all personal data associated with it (learning progress, vocabulary, conversation history, streaks, and analytics data linked to your anonymous identifier).</li>
+    <li>Deleting your account permanently erases all personal data associated with it (learning progress, vocabulary, conversation history, voice recordings, streaks, and analytics data linked to your anonymous identifier).</li>
     <li>Alternatively, you can send an email to <a href="mailto:contact@ecomparis.org">contact@ecomparis.org</a> with the subject "Data Deletion Request".</li>
     <li>All verified deletion requests are processed within 30 days and cannot be undone once completed.</li>
   </ul>
